@@ -105,7 +105,6 @@ const TPLAT_COLORS = { meituan: '#F783AC', eleme: '#4dabf7', other: '#adb0bd' };
 reg('takeout', {
   name: '外卖点餐', icon: '🛵', color: '#F783AC', bg: '#fee9f2',
   defaults: {
-    foodCost: '', deliveryFee: '', packFee: '', discount: '',
     platform: 'meituan', mealType: 'lunch'
   },
   fields: [
@@ -113,10 +112,6 @@ reg('takeout', {
     { key: 'date', label: '日期', type: 'date', half: true },
     { key: 'mealType', label: '餐次', type: 'select', options: MEALS, half: true },
     { key: 'platform', label: '外卖平台', type: 'select', options: TPLATFORMS },
-    { key: 'foodCost', label: '菜品价（选填）', type: 'number', half: true, placeholder: '选填' },
-    { key: 'deliveryFee', label: '配送费（选填）', type: 'number', half: true, placeholder: '选填' },
-    { key: 'packFee', label: '包装费（选填）', type: 'number', half: true, placeholder: '选填' },
-    { key: 'discount', label: '优惠减免（选填）', type: 'number', half: true, placeholder: '选填' },
     { key: 'shop', label: '商家', type: 'text', placeholder: '如：黄焖鸡米饭（xx店）' },
     { key: 'dishes', label: '点了什么菜', type: 'text', placeholder: '如：黄焖鸡大份+米饭' },
     { key: 'note', label: '备注', type: 'textarea' }
@@ -124,17 +119,16 @@ reg('takeout', {
   fmt(r) {
     return {
       title: r.shop || '外卖',
-      sub: [r.dishes, optLabel(TPLATFORMS, r.platform),
-      '配送费 ' + U.yuan(r.deliveryFee || 0, false)].filter(Boolean).join(' · '),
+      sub: [r.dishes, optLabel(TPLATFORMS, r.platform)].filter(Boolean).join(' · '),
       tag: optLabel(MEALS, r.mealType), tagCls: 'info'
     };
   },
   kpi(records) {
     const total = U.sum(records, r => r.amount);
     return [
+      { v: U.yuan(total), l: '外卖总支出' },
       { v: records.length + ' 次', l: '外卖次数' },
-      { v: records.length ? U.yuan(total / records.length) : '¥0', l: '平均客单价' },
-      { v: U.yuan(U.sum(records, r => r.deliveryFee)), l: '配送费累计', tone: 'red' }
+      { v: records.length ? U.yuan(total / records.length) : '¥0', l: '平均客单价' }
     ];
   },
   dist(records) {
