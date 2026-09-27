@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我的记账本</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#4453c8">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="记账本">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="phone">
+  <main id="app" class="app"></main>
+  <nav class="tabbar">
+    <a href="#/home" class="tab" data-nav="home">
+      <span class="tab-ic">🏠</span><span class="tab-tx">首页</span>
+    </a>
+    <button id="navAdd" class="tab-add" aria-label="记一笔">
+      <span class="tab-plus">＋</span>
+    </button>
+    <a href="#/settings" class="tab" data-nav="settings">
+      <span class="tab-ic">⚙️</span><span class="tab-tx">我的</span>
+    </a>
+  </nav>
+</div>
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script src="js/util.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/mod-a.js"></script>
+<script src="js/mod-b.js"></script>
+<script src="js/mod-c.js"></script>
+<script src="js/home.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
+<script>
+/* PWA：注册 Service Worker。file:// 双击打开时注册会静默失败，不影响电脑端使用 */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('service-worker.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>

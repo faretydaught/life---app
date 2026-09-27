@@ -1,0 +1,18 @@
+# 依赖
+node_modules/
+
+# 安卓构建产物
+android/app/build/
+android/.gradle/
+android/local.properties
+android/captures/
+android/.idea/
+
+# 打包/安装包产物
+*.apk
+*.zip
+
+# 系统与编辑器文件
+Thumbs.db
+.DS_Store
+*.log

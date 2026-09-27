@@ -1,0 +1,15 @@
+{
+  "name": "my-life-ledger",
+  "version": "1.1.0",
+  "description": "个人本地记账应用",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'no build step'",
+    "apk": "capacitor build android"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.6.9",
+    "@capacitor/cli": "^7.6.9",
+    "@capacitor/core": "^7.6.9"
+  }
+}

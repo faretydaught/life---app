@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>安装记账本到手机</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #f4f5f8;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #2b2d33; line-height: 1.6;
+  }
+  .wrap { max-width: 520px; margin: 0 auto; padding: 18px 16px 40px; }
+  h1 { font-size: 20px; margin: 4px 0 4px; }
+  .sub { color: #969ba8; font-size: 13px; margin-bottom: 16px; }
+  .card {
+    background: #fff; border-radius: 16px; padding: 16px;
+    box-shadow: 0 2px 12px rgba(50,60,90,.06); margin-bottom: 12px;
+  }
+  .step-n {
+    display: inline-block; width: 26px; height: 26px; border-radius: 9px;
+    background: #4453c8; color: #fff; text-align: center; line-height: 26px;
+    font-weight: 700; font-size: 14px; margin-right: 8px;
+  }
+  .step-t { font-weight: 700; font-size: 16px; }
+  .btn {
+    display: block; text-align: center; border-radius: 13px; padding: 13px;
+    font-size: 16px; font-weight: 700; margin: 12px 0 8px;
+    text-decoration: none;
+  }
+  .btn-primary { background: linear-gradient(135deg,#5b6ee0,#4453c8); color: #fff; }
+  .btn-ghost { background: #eef0f5; color: #333; }
+  .note { font-size: 13px; color: #6b7080; }
+  .note b { color: #b03136; }
+  ol { margin: 10px 0 0; padding-left: 20px; }
+  li { margin-bottom: 7px; font-size: 14px; }
+  .tip {
+    background: #e9eefd; border-radius: 12px; padding: 10px 13px;
+    font-size: 13px; color: #3b4a9b; margin-top: 10px;
+  }
+  .warn-box {
+    background: #fff0f0; border-radius: 12px; padding: 10px 13px;
+    font-size: 13px; color: #8a2020; margin-top: 10px;
+  }
+  code {
+    background: #f0f1f5; padding: 1px 6px; border-radius: 5px; font-size: 13px;
+  }
+  .brand-item {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 7px 0; border-bottom: 1px solid #f0f0f2; font-size: 13.5px;
+  }
+  .brand-name { font-weight: 700; color: #333; min-width: 72px; }
+  .brand-path { color: #555; }
+  .brand-item:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📲 安装「记账本」到手机</h1>
+  <div class="sub">全程只在你家里的网络中进行，不会连接互联网。</div>
+
+  <div class="card">
+    <div class="step-t">⚠️ 安装前必读</div>
+    <div class="note" style="margin-top:8px">
+      <ol style="padding-left:18px">
+        <li>手机必须和电脑连<b>同一个 WiFi</b>；</li>
+        <li>电脑上的安装服务窗口<b>在添加到桌面之前不要关闭</b>；</li>
+        <li>如果电脑上弹出"Windows 安全警报"问是否允许 PowerShell 访问网络，请点<b>「允许」</b>；</li>
+        <li>手机上是一本<b>独立的新账本</b>，和电脑上的数据互不相通。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div><span class="step-n">1</span><span class="step-t">下载并安装安全证书</span></div>
+    <a class="btn btn-primary" href="/RootCA.cer" download>① 下载 CA 证书</a>
+    <div class="note">
+      下载后需要<b>手动安装</b>证书（Chrome 不会自动安装）。<br>
+      不同品牌手机的路径不一样，请按你的手机品牌查找：
+    </div>
+    <div style="margin-top:8px">
+      <div class="brand-item"><span class="brand-name">小米/Redmi</span><span class="brand-path">设置 → 密码与安全 → 系统安全 → 加密与凭据 → 从存储设备安装 → CA 证书</span></div>
+      <div class="brand-item"><span class="brand-name">华为/荣耀</span><span class="brand-path">设置 → 安全 → 更多安全设置 → 加密与凭据 → 从存储设备安装 → CA 证书<br>（或在设置顶部搜索"证书"）</span></div>
+      <div class="brand-item"><span class="brand-name">OPPO/realme</span><span class="brand-path">设置 → 安全 → 安装证书 → CA 证书</span></div>
+      <div class="brand-item"><span class="brand-name">vivo/iQOO</span><span class="brand-path">设置 → 安全与隐私 → 更多安全设置 → 从手机存储安装 → CA 证书</span></div>
+      <div class="brand-item"><span class="brand-name">三星</span><span class="brand-path">设置 → 生物识别和安全 → 其他安全设置 → 安装证书 → CA 证书</span></div>
+      <div class="brand-item"><span class="brand-name">一加</span><span class="brand-path">设置 → 安全和锁屏 → 加密与凭据 → 安装证书 → CA 证书</span></div>
+    </div>
+    <div class="warn-box">
+      <b>卡住常见问题：</b>
+      <ol style="padding-left:18px;margin-top:4px">
+        <li>如果系统提示"需要先设置锁屏密码"，去设置一个<b>数字 PIN 码</b>（装完证书可以改回图案/指纹）；</li>
+        <li>安装时若弹出"您的网络可能受到监控"，这是正常提示，点<b>「仍然安装」</b>；</li>
+        <li>装完后<b>杀掉 Chrome 重新打开</b>（从最近任务里划掉 Chrome），否则可能仍显示安全警告。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div><span class="step-n">2</span><span class="step-t">打开记账应用</span></div>
+    <a id="appLink" class="btn btn-primary" href="#">② 打开记账本（加密连接）</a>
+    <div class="note">
+      打开后应<b>没有任何安全警告</b>，能看到记账首页（初始为空是正常的——手机是一本独立的新账）。
+      <br>如果仍有红色安全警告，说明第 1 步证书没装好，请回去重装。
+    </div>
+  </div>
+
+  <div class="card">
+    <div><span class="step-n">3</span><span class="step-t">添加到手机桌面</span></div>
+    <ol>
+      <li>点 Chrome 右上角 <b>「⋮」</b> 菜单；</li>
+      <li>选择 <b>「安装应用」</b> 或 <b>「添加到主屏幕」</b>，按确认；</li>
+      <li>手机桌面上会出现「记账本」图标。</li>
+    </ol>
+    <div class="tip">
+      没有谷歌服务的手机，菜单里可能只显示「添加到主屏幕」——这是正常的，功能完全一样。
+    </div>
+  </div>
+
+  <div class="card">
+    <div><span class="step-n">4</span><span class="step-t">验证离线可用</span></div>
+    <ol>
+      <li><b>现在可以关掉电脑上的安装服务窗口了</b>（Ctrl+C 或直接 × 掉）；</li>
+      <li>手机<b>断开 WiFi / 开飞行模式</b>；</li>
+      <li>从桌面图标打开「记账本」——应能正常打开、正常记账；</li>
+      <li>记一笔后关掉重开，数据仍在，即安装成功。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="step-t">🔧 如果打不开怎么办？</div>
+    <div class="note" style="margin-top:8px">
+      <ol style="padding-left:18px">
+        <li><b>手机访问不了引导页</b>：确认手机和电脑连的是<b>同一个 WiFi</b>（不是手机流量）；检查电脑上有没有弹出 Windows 防火墙弹窗并点了"拒绝"；某些公共/公司 WiFi 开了"AP 隔离"（设备间不能互访），此时可以改用手机开热点让电脑连上；</li>
+        <li><b>证书装好了仍有安全警告</b>：杀掉 Chrome 重新打开；确认安装的是<b>CA 证书</b>而不是用户证书；</li>
+        <li><b>HTTPS 能打开但添加到桌面后离线打不开</b>：说明 Service Worker 没缓存成功。先通过浏览器正常打开一次 HTTPS 页面，等几秒再添加；</li>
+        <li><b>换 WiFi / 路由器重启后打不开</b>：电脑 IP 变了，证书里的 IP 也变了。回到电脑重新运行 <code>tools\install-server.ps1</code> 即可重新生成证书和启动服务。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step-t">ℹ️ 重要提醒</div>
+    <div class="note" style="margin-top:8px">
+      <b>清理 Chrome 数据会删除手机账本！</b> 清理前务必在应用「我的」页导出备份（JSON 文件保存到手机下载目录）。<br><br>
+      电脑上无需安装任何额外软件。整个安装工具（证书生成 + HTTP/HTTPS 双端口服务）都是纯 PowerShell 脚本，运行完即可删除，不会常驻后台。
+    </div>
+  </div>
+</div>
+<script>
+  var host = location.hostname;
+  document.getElementById('appLink').href = 'https://' + host + ':18766/';
+</script>
+</body>
+</html>
