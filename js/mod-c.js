@@ -101,25 +101,22 @@ const TPLATFORMS = [
   { v: 'other', l: '其他' }
 ];
 const TPLAT_COLORS = { meituan: '#F783AC', eleme: '#4dabf7', other: '#adb0bd' };
-const paidCalc = v => Math.max(0,
-  (Number(v.foodCost) || 0) + (Number(v.deliveryFee) || 0) +
-  (Number(v.packFee) || 0) - (Number(v.discount) || 0));
 
 reg('takeout', {
   name: '外卖点餐', icon: '🛵', color: '#F783AC', bg: '#fee9f2',
   defaults: {
-    foodCost: 0, deliveryFee: 0, packFee: 0, discount: 0,
+    foodCost: '', deliveryFee: '', packFee: '', discount: '',
     platform: 'meituan', mealType: 'lunch'
   },
   fields: [
-    { key: 'amount', label: '实付金额（自动计算）', type: 'computed', fn: paidCalc },
-    { key: 'foodCost', label: '菜品小计', type: 'number', half: true },
-    { key: 'deliveryFee', label: '配送费', type: 'number', half: true },
-    { key: 'packFee', label: '包装费', type: 'number', half: true },
-    { key: 'discount', label: '优惠减免', type: 'number', half: true },
+    { key: 'amount', label: '实付金额', type: 'amount' },
     { key: 'date', label: '日期', type: 'date', half: true },
     { key: 'mealType', label: '餐次', type: 'select', options: MEALS, half: true },
     { key: 'platform', label: '外卖平台', type: 'select', options: TPLATFORMS },
+    { key: 'foodCost', label: '菜品价（选填）', type: 'number', half: true, placeholder: '选填' },
+    { key: 'deliveryFee', label: '配送费（选填）', type: 'number', half: true, placeholder: '选填' },
+    { key: 'packFee', label: '包装费（选填）', type: 'number', half: true, placeholder: '选填' },
+    { key: 'discount', label: '优惠减免（选填）', type: 'number', half: true, placeholder: '选填' },
     { key: 'shop', label: '商家', type: 'text', placeholder: '如：黄焖鸡米饭（xx店）' },
     { key: 'dishes', label: '点了什么菜', type: 'text', placeholder: '如：黄焖鸡大份+米饭' },
     { key: 'note', label: '备注', type: 'textarea' }
@@ -182,7 +179,7 @@ reg('takeout', {
         btn.className = 'btn btn-sm btn-primary';
         btn.textContent = '再来一单';
         btn.addEventListener('click', () => UI.recordForm('takeout', {
-          preset: { shop: x.shop, platform: x.platform, foodCost: Math.round(x.avg) },
+          preset: { shop: x.shop, platform: x.platform, amount: Math.round(x.avg) },
           onDone: rerender
         }));
         row.appendChild(btn);
